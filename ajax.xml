@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+- phpMyAdmin XML Dump
+- version 5.2.0
+- https://www.phpmyadmin.net
+-
+- Host: localhost
+- Generation Time: Feb 12, 2023 at 11:29 AM
+- Server version: 10.4.27-MariaDB
+- PHP Version: 8.2.0
+-->
+
+<pma_xml_export version="1.0" xmlns:pma="https://www.phpmyadmin.net/some_doc_url/">
+    <!--
+    - Structure schemas
+    -->
+    <pma:structure_schemas>
+        <pma:database name="ajax" collation="utf8mb4_general_ci" charset="utf8mb4">
+            <pma:table name="user">
+                CREATE TABLE `user` (
+                  `u_id` int(11) NOT NULL AUTO_INCREMENT,
+                  `u_name` varchar(100) NOT NULL,
+                  `u_email` varchar(150) NOT NULL,
+                  `u_gender` varchar(10) NOT NULL,
+                  `u_country` varchar(30) NOT NULL,
+                  `u_bod` date NOT NULL,
+                  PRIMARY KEY (`u_id`)
+                ) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
+            </pma:table>
+        </pma:database>
+    </pma:structure_schemas>
+
+    <!--
+    - Database: 'ajax'
+    -->
+    <database name="ajax">
+        <!-- Table user -->
+        <table name="user">
+            <column name="u_id">7</column>
+            <column name="u_name">hacker</column>
+            <column name="u_email">hacker@gmail.com</column>
+            <column name="u_gender">Female</column>
+            <column name="u_country">UK</column>
+            <column name="u_bod">2018-06-01</column>
+        </table>
+        <table name="user">
+            <column name="u_id">8</column>
+            <column name="u_name">jaydeep</column>
+            <column name="u_email">jaydeep@gmail.com</column>
+            <column name="u_gender">Male</column>
+            <column name="u_country">USA</column>
+            <column name="u_bod">2019-02-01</column>
+        </table>
+        <table name="user">
+            <column name="u_id">9</column>
+            <column name="u_name">Mazina</column>
+            <column name="u_email">Dan</column>
+            <column name="u_gender">Male</column>
+            <column name="u_country">USA</column>
+            <column name="u_bod">2023-02-08</column>
+        </table>
+        <table name="user">
+            <column name="u_id">10</column>
+            <column name="u_name">dan</column>
+            <column name="u_email">mussaniyoduseng</column>
+            <column name="u_gender">Male</column>
+            <column name="u_country">Germany</column>
+            <column name="u_bod">2023-02-01</column>
+        </table>
+    </database>
+</pma_xml_export>

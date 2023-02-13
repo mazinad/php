@@ -157,5 +157,80 @@ class Userfunction{
 	}	
 
 }
-
+//function to prepare statement for insert, update, delete, select
+function prepare_stmt($con, $sql, $params){
+	$stmt = mysqli_stmt_init($con);
+	if(!mysqli_stmt_prepare($stmt, $sql)){
+		return false;
+	}
+	else{
+		$types = "";
+		foreach($params as $param){
+			if(is_int($param)){
+				$types .= "i";
+			}
+			elseif(is_string($param)){
+				$types .= "s";
+			}
+			elseif(is_double($param)){
+				$types .= "d";
+			}
+			else{
+				$types .= "b";
+			}
+		}
+		$bind_names[] = $types;
+		for($i=0; $i<count($params); $i++){
+			$bind_name = 'bind' . $i;
+			$$bind_name = $params[$i];
+			$bind_names[] = &$$bind_name;
+		}
+		call_user_func_array(array($stmt, 'bind_param'), $bind_names);
+		return $stmt;
+	}
+}
+//function to create a prepared statement for insert
+function insert($con, $table, $data){
+	$keys = array_keys($data);
+	$values = array_values($data);
+	$sql = "INSERT INTO $table (".implode(", ", $keys).") VALUES (".implode(", ", array_fill(0, count($values), "?")).")";
+	$stmt = prepare_stmt($con, $sql, $values);
+	if($stmt){
+		mysqli_stmt_execute($stmt);
+		return mysqli_stmt_insert_id($stmt);
+	}
+	else{
+		return false;
+	}
+}
+//function to create a prepared statement for update
+function update($con, $table, $data, $where){
+	$keys = array_keys($data);
+	$values = array_values($data);
+	$set = "";
+	foreach($keys as $key){
+		$set .= "$key=?, ";
+	}
+	$set = rtrim($set, ", ");
+	$sql = "UPDATE $table SET $set WHERE $where";
+	$stmt = prepare_stmt($con, $sql, $values);
+	if($stmt){
+		mysqli_stmt_execute($stmt);
+		return mysqli_stmt_affected_rows($stmt);
+	}
+	else{
+		return false;
+	}
+}
+//function to create a prepared statement for delete
+function delete($con, $table, $where){
+	$sql = "DELETE FROM $table WHERE $where";
+	$stmt = mysqli_query($con, $sql);
+	if($stmt){
+		return mysqli_affected_rows($con);
+	}
+	else{
+		return false;
+	}
+}
 ?>

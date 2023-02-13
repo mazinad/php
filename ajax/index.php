@@ -1,5 +1,8 @@
 <?php
-
+session_start();
+if(!isset($_SESSION['username'])){
+    echo"<script>window.location='../../login.php';</script>";
+    }
 ?>
 
 <!doctype html>
@@ -10,6 +13,9 @@
 	<title>Ajax Insert || Update || Delete</title>
 	<link href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" rel="stylesheet" type="text/css">
 	<style type="text/css">
+		body{
+			background: pink;
+		}
 		.box-title{
 			border-radius: 5px;
 			box-shadow: 0px 0px 3px 1px gray;
@@ -23,16 +29,43 @@
 			color: green;
 			font-weight: 600;
 		}
+		.topnav {
+  		overflow: hidden;
+  		background-color: #333;
+}
+
+		.topnav a {
+  		float: left;
+  		color: #f2f2f2;
+  		text-align: center;
+  		padding: 14px 16px;
+  		text-decoration: none;
+  		font-size: 17px;
+}
+
+		.topnav a:hover {
+  		background-color: #ddd;
+  		color: black;
+}
+
+	  .topnav a.active {
+  		background-color: #04AA6D;
+  		color: white;
+}
 	</style>
+	
 </head>
 
 <body>
-	
+<div class="topnav">
+ <a class="active" href="index.php">Home</a>
+ <a href="homePage.php">Logout</a>
+</div>
 	<div class="container-fluid">
 		<div class="container">
 			<div class="row m-3 text-center">
 				<div class="col-lg-12">
-					<h1 class="box-title">Ajax Insert || Update || Delete</h1>
+					<h1 class="box-title">Form</h1>
 				</div>
 			</div>
 			<div  class="row justify-content-center">
@@ -64,12 +97,12 @@
 	      <div class="modal-body">
 			  	<div class="form-group">
 					<label><b>User Name</b></label>
-					<input type="text" name="username" class="form-control" placeholder="Username">
+					<input type="text" name="username" class="form-control" placeholder="Username" required>
 					<span class="error-msg" id="msg_1"></span>
 			  	</div>
 			  	<div class="form-group">
 					<label><b>Email</b></label>
-					<input type="text" name="email" class="form-control" placeholder="YourEmail@email.com">
+					<input type="email" name="email" class="form-control" placeholder="YourEmail@email.com" required>
 					<span class="error-msg" id="msg_2"></span>
 			  	</div>
 				<div class="form-group">
@@ -129,7 +162,7 @@
       <div class="modal-body">
 		  	<div class="form-group">
 				<label><b>User Name</b></label>
-				<input type="text" class="form-control" name="username" id="upd_1" placeholder="Username">
+				<input type="text" class="form-control" name="username" id="upd_1" placeholder="Username" required>
 				<span class="error-msg" id="umsg_1"></span>
 		  	</div>
 		  	<div class="form-group">
